@@ -23,13 +23,13 @@
                 </a>
                 <div class="navbar-dropdown is-boxed">
 
-                    <a class="navbar-item" href="#">
-                        Nuevo
+                    <a class="navbar-item" href="<?php echo APP_URL; ?>userNew/">
+                        Nuevo usuario
                     </a>
-                    <a class="navbar-item" href="#">
-                        Lista
+                    <a class="navbar-item" href="<?php echo APP_URL; ?>userList/">
+                        Lista de Usuarios
                     </a>
-                    <a class="navbar-item" href="#">
+                    <a class="navbar-item" href="<?php echo APP_URL; ?>userSearch/">
                         Buscar
                     </a>
 
@@ -44,14 +44,11 @@
                 </a>
                 <div class="navbar-dropdown is-boxed">
 
-                    <a class="navbar-item" href="#">
+                    <a class="navbar-item" href="<?php echo APP_URL; ?>userUpdate/">
                         Mi cuenta
                     </a>
-                    <a class="navbar-item" href="#">
-                        Mi foto
-                    </a>
                     <hr class="navbar-divider">
-                    <a class="navbar-item" href="#" id="btn_exit" >
+                    <a class="navbar-item" href="<?php echo APP_URL; ?>logOut/" id="btn_exit" >
                         Salir
                     </a>
 

@@ -55,6 +55,8 @@
             }
 		}
 
+
+     // ------------METODOS PARA EL CRUD--------------------
 		protected function guardarDatos($tabla,$datos)
         {
 
@@ -87,6 +89,9 @@
 
 			return $sql;
 		}
+
+
+
         public function seleccionarDatos($tipo,$tabla,$campo,$id){
 			$tipo=$this->limpiarCadena($tipo);
 			$tabla=$this->limpiarCadena($tabla);
@@ -103,6 +108,8 @@
 
             return $sql;
 		}
+
+
 
 
 
@@ -133,6 +140,8 @@
 		}
 
 
+
+
         protected function eliminarRegistro($tabla,$campo,$id){
             $sql=$this->conectar()->prepare("DELETE FROM $tabla WHERE $campo=:id");
             $sql->bindParam(":id",$id);
@@ -140,6 +149,61 @@
             
             return $sql;
         }
+
+
+        //Paginacion para las tablas con botones de BULMA para cuando se muestren los registros
+        protected function paginadorTablas($pagina,$numeroPaginas,$url,$botones){
+	        $tabla='<nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">';
+
+	        if($pagina<=1){ //Desahibilita el boton de anterior si la pagina es la primera
+	            $tabla.='
+	            <a class="pagination-previous is-disabled" disabled >Anterior</a>
+	            <ul class="pagination-list">
+	            ';
+	        }else{ //Si no es la primera pagina, se habilita el boton de anterior
+	            $tabla.='
+	            <a class="pagination-previous" href="'.$url.($pagina-1).'/">Anterior</a>
+	            <ul class="pagination-list">
+	                <li><a class="pagination-link" href="'.$url.'1/">1</a></li>
+	                <li><span class="pagination-ellipsis">&hellip;</span></li>
+	            ';
+	        }
+
+
+	        $ci=0; 
+	        for($i=$pagina; $i<=$numeroPaginas; $i++){ //Ciclo para mostrar los botones, se va autoincrementando
+
+	            if($ci>=$botones){
+	                break; //Para evitar que se generen mas botones de los que se han definido
+	            }
+
+	            if($pagina==$i){ //Si la pagina es igual al boton, se cambia el color (Es la pagina actual)
+	                $tabla.='<li><a class="pagination-link is-current" href="'.$url.$i.'/">'.$i.'</a></li>';
+	            }else{ //Si no es la pagina actual, se muestra el boton normal
+	                $tabla.='<li><a class="pagination-link" href="'.$url.$i.'/">'.$i.'</a></li>';
+	            }
+
+	            $ci++;
+	        }
+
+
+	        if($pagina==$numeroPaginas){ //Desahibilita el boton de siguiente si la pagina es la ultima
+	            $tabla.='
+	            </ul>
+	            <a class="pagination-next is-disabled" disabled >Siguiente</a>
+	            ';
+	        }else{
+	            $tabla.='
+	                <li><span class="pagination-ellipsis">&hellip;</span></li>
+	                <li><a class="pagination-link" href="'.$url.$numeroPaginas.'/">'.$numeroPaginas.'</a></li>
+	            </ul>
+	            <a class="pagination-next" href="'.$url.($pagina+1).'/">Siguiente</a>
+	            ';
+	        }
+
+	        $tabla.='</nav>';
+	        return $tabla;
+	    }
 
 
     }
