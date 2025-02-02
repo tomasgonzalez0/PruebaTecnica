@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\app",
+    "\\app\\views",
+    "\\config"
   ],
-  "SelectedNode": "\\config",
+  "SelectedNode": "\\index.php",
   "PreviewInSolutionExplorer": false
 }
