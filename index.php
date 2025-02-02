@@ -19,6 +19,13 @@
 </head>
 <body>
 
-<?php require_once "./app/views/inc/script.php"; ?>
+<?php 
+    use app\controllers\viewsController;
+
+    $viewsController = new viewsController();
+    $vista = $viewsController->obtenerVistasController($url[0]);
+    require_once "./app/views/inc/script.php"; 
+    
+?>
 </body>
 </html>
