@@ -1,51 +1,54 @@
-const formularios_ajax=document.querySelectorAll(".FormularioAjax");//Seleccionamos todos los formularios
+/* Enviar formularios via AJAX */
+const formularios_ajax=document.querySelectorAll(".FormularioAjax");
 
+formularios_ajax.forEach(formularios => {
 
-//-----------Enviar datos por medio de AJAX-------------------
-formularios_ajax.forEach(formularios => { //Recorremos cada formulario
-    formularios.addEventListener("submit",function(e){ //Agregamos un evento submit a cada formulario
-        e.preventDefault();//Prevenimos que se recargue la página
+    formularios.addEventListener("submit",function(e){
         
-        Swal.fire({ //Codigo de sweetalert
-            title: '¿Estas seguro?',
-            text: "¿Realmente deseas realizar esta acción?",
+        e.preventDefault();
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Quieres realizar la acción solicitada",
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, continuar',
+            confirmButtonText: 'Si, realizar',
             cancelButtonText: 'No, cancelar'
         }).then((result) => {
-            if (result.isConfirmed) {
-               
-                    let data = new FormData(this);
-                    let method = this.getAttribute("method");
-                    let action = this.getAttribute("action");
-                    let encabezados = new Headers();
-                    let config= //Configuracion para enviar datos pro FETCH
-                    {   
-                        method:method,
-                        headers:encabezados,
-                        mode:'cors',
-                        cache:'no-cache',
-                        body:data
-                    };
+            if (result.isConfirmed){
 
-                    fetch(action,config)
-                    .then(respuesta => respuesta.json())//Recibo una respuesta (Promesa) y la formateo a json
-                    .then(respuesta => {//Cuando la reciba hara el bloque de codigo
-                        return alertas_ajax(respuesta);
-                    });
+                let data = new FormData(this);
+                let method=this.getAttribute("method");
+                let action=this.getAttribute("action");
+
+                let encabezados= new Headers();
+
+                let config={
+                    method: method,
+                    headers: encabezados,
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    body: data
+                };
+
+                fetch(action,config)
+                .then(respuesta => respuesta.json())
+                .then(respuesta =>{ 
+                    return alertas_ajax(respuesta);
+                });
             }
-        })
+        });
+
     });
+
 });
 
 
-function alertas_ajax(alerta)
-{
-    if(alerta.tipo=="simple")
-    {
+
+function alertas_ajax(alerta){
+    if(alerta.tipo=="simple"){
 
         Swal.fire({
             icon: alerta.icono,
@@ -53,24 +56,61 @@ function alertas_ajax(alerta)
             text: alerta.texto,
             confirmButtonText: 'Aceptar'
         });
-        
-    }else if(alerta.tipo=="recargar")
-        {
-            Swal.fire({
-                icon: alerta.icono,
-                title: alerta.titulo,
-                text: alerta.texto,
-                confirmButtonText: 'Aceptar'
-            }).then((result) => {
-                if(result.isConfirmed){
-                    location.reload();
-                }
-            });
-        }else if(alerta.tipo=="limpiar")
-            {
-                document.querySelector(".FomularioAjax").reset();
-            }else if(alerta.tipo=="redireccionar")
-                {
-                    window.location.href=alerta.url;
-                }
+
+    }else if(alerta.tipo=="recargar"){
+
+        Swal.fire({
+            icon: alerta.icono,
+            title: alerta.titulo,
+            text: alerta.texto,
+            confirmButtonText: 'Aceptar'
+        }).then((result) => {
+            if(result.isConfirmed){
+                location.reload();
+            }
+        });
+
+    }else if(alerta.tipo=="limpiar"){
+
+        Swal.fire({
+            icon: alerta.icono,
+            title: alerta.titulo,
+            text: alerta.texto,
+            confirmButtonText: 'Aceptar'
+        }).then((result) => {
+            if(result.isConfirmed){
+                document.querySelector(".FormularioAjax").reset();
+            }
+        });
+
+    }else if(alerta.tipo=="redireccionar"){
+        window.location.href=alerta.url;
+    }
 }
+
+
+
+/* Boton cerrar sesion */
+let btn_exit=document.getElementById("btn_exit");
+
+btn_exit.addEventListener("click", function(e){
+
+    e.preventDefault();
+    
+    Swal.fire({
+        title: '¿Quieres salir del sistema?',
+        text: "La sesión actual se cerrará y saldrás del sistema",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, salir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let url=this.getAttribute("href");
+            window.location.href=url;
+        }
+    });
+
+});

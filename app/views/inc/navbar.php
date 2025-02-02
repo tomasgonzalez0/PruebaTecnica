@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="navbar-brand">
         <a class="navbar-item" href="<?php echo APP_URL; ?>dashboard/">
-            <img src="<?php echo APP_URL; ?>app/views/img/logo.png" alt="Bulma" width="100" height="20">
+            <img src="<?php echo APP_URL; ?>app/views/img/logo.png" alt="ACEMA INGENIERIA" width="100" height="100">
         </a>
         <div class="navbar-burger" data-target="navbarExampleTransparentExample">
             <span></span>
@@ -27,10 +27,10 @@
                         Nuevo usuario
                     </a>
                     <a class="navbar-item" href="<?php echo APP_URL; ?>userList/">
-                        Lista de Usuarios
+                        Lista usuarios
                     </a>
                     <a class="navbar-item" href="<?php echo APP_URL; ?>userSearch/">
-                        Buscar
+                        Buscar usuarios
                     </a>
 
                 </div>
@@ -40,15 +40,15 @@
         <div class="navbar-end">
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
-                    ** User Name **
+                    ** <?php echo $_SESSION['usuario']; ?> **
                 </a>
                 <div class="navbar-dropdown is-boxed">
 
-                    <a class="navbar-item" href="<?php echo APP_URL; ?>userUpdate/">
+                    <a class="navbar-item" href="<?php echo APP_URL."userUpdate/".$_SESSION['id']."/"; ?>">
                         Mi cuenta
                     </a>
                     <hr class="navbar-divider">
-                    <a class="navbar-item" href="<?php echo APP_URL; ?>logOut/" id="btn_exit" >
+                    <a class="navbar-item" href="<?php echo APP_URL."logOut/"; ?>" id="btn_exit" >
                         Salir
                     </a>
 

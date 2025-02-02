@@ -4,7 +4,7 @@
 
     class viewsController extends viewsModel
     {
-        public function obtenerVistasController($vista)
+        public function obtenerVistasControlador($vista)
         {
             if($vista!="")
             {
