@@ -11,7 +11,7 @@
             {
                 if(is_file("./app/views/content/".$vista."-view.php"))
                 {
-                    $contenido = "./views/content/".$vista."-view.php";
+                    $contenido = "./app/views/content/".$vista."-view.php";
                 }
                 else
                 {
