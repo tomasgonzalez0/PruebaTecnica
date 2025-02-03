@@ -1,4 +1,4 @@
-/* Enviar formularios via AJAX */
+/*Enviar los datos media AJAX*/ 
 const formularios_ajax=document.querySelectorAll(".FormularioAjax");
 
 formularios_ajax.forEach(formularios => {
@@ -7,7 +7,7 @@ formularios_ajax.forEach(formularios => {
         
         e.preventDefault();
 
-        Swal.fire({
+        Swal.fire({ //Codigo SWEET ALERT
             title: '¿Estás seguro?',
             text: "Quieres realizar la acción solicitada",
             icon: 'question',
@@ -90,7 +90,7 @@ function alertas_ajax(alerta){
 
 
 
-/* Boton cerrar sesion */
+/*BOTON CERRAR LA SESION */
 let btn_exit=document.getElementById("btn_exit");
 
 btn_exit.addEventListener("click", function(e){

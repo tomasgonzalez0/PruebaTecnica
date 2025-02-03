@@ -29,9 +29,6 @@
                     <a class="navbar-item" href="<?php echo APP_URL; ?>userList/">
                         Lista usuarios
                     </a>
-                    <a class="navbar-item" href="<?php echo APP_URL; ?>userSearch/">
-                        Buscar usuarios
-                    </a>
 
                 </div>
             </div>
